@@ -1,0 +1,1947 @@
+openapi: 3.0.0
+info:
+  title: BankManagementAPI
+  version: 1.0.0
+
+tags:
+  - name: Cheque
+    description: Description about Cheques
+  - name: Loans
+    description: Description about Loans
+  - name: Credit Cards
+    description: Description about Credit Cards
+  - name: Debit Cards
+    description: Description about Debit Cards
+  - name: Currency
+    description: Description about Currency
+  - name: Accounts
+    description: Description about Accounts
+  - name: Branches
+    description: Description about Branches
+  - name: Contracts
+    description: Description about Contracts
+  - name: Parties
+    description: Description about Parties
+
+components:
+  parameters:
+    transferType:
+      name: transferType
+      in: query
+      required: true
+      schema:
+        type: string
+        example: "sent"
+    accountId:
+      name: accountId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+    aliasId:
+      name: aliasId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+    actionId:
+      name: actionId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+    creditOperationId:
+      name: creditOperationId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+    depositId:
+      name: depositId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+    eventId:
+      name: eventId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+    operationId:
+      name: operationId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+    orderId:
+      name: orderId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+    cardId:
+      name: cardId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+    clientId:
+      name: clientId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+    branchId:
+      name: branchId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+    contractId:
+      name: contractId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+    contract:
+      name: contractId
+      in: query
+      required: false
+      schema:
+        type: string
+        example: "123Abc"
+    holdId:
+      name: holdId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+    paymentId:
+      name: paymentId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+    payment:
+      name: paymentType
+      in: query
+      required: false
+      schema:
+        type: string
+        example: "123Abc"
+    partyId:
+      name: partyId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+    party:
+      name: partyId
+      in: query
+      required: false
+      schema:
+        type: string
+        example: "123Abc"
+    documentId:
+      name: documentId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+    restrictionId:
+      name: restrictionId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+    transactionId:
+      name: transactionId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+    profileId:
+      name: profileId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "123Abc"
+
+  schemas:
+    bodyExample:
+      type: object
+      properties:
+        info:
+          type: object
+          example: {
+            name: "John Doe",
+            email: "john@example.com"
+          }
+          
+    genericResponse:
+      type: object
+      properties:
+        msg:
+          type: string
+      example: 
+        msg: Success
+
+    badRequest:
+      type: object
+      properties:
+        msg:
+          type: string
+      example: 
+        msg: Bad request
+        
+    getSuccess:
+      type: object
+      properties:
+        info:
+          type: object
+          example: {
+            info1: "Value 1",
+            info2: "Value2",
+          }
+        
+    postSuccess:
+      type: object
+      properties:
+        msg:
+          type: string
+      example: 
+        msg: Data successfully introduced
+        
+    putSuccess:
+      type: object
+      properties:
+        msg:
+          type: string
+      example: 
+        msg: Data successfully updated
+        
+    delSuccess:
+      type: object
+      properties:
+        msg:
+          type: string
+      example: 
+        msg: Data successfully deleted
+        
+    genericError:
+      type: object
+      properties:
+        errMsg:
+          type: string
+      example: 
+        errMsg: There was an unknown error
+        
+    getError:
+      type: object
+      properties:
+        errMsg:
+          type: string
+      example: 
+        errMsg: There was an error RETRIEVING the information you requested
+        
+    postError:
+      type: object
+      properties:
+        errMsg:
+          type: string
+      example: 
+        errMsg: There was an error POSTING the information you requested
+        
+    putError:
+      type: object
+      properties:
+        errMsg:
+          type: string
+      example: 
+        errMsg: There was an error UPDATING the information you requested
+        
+    deleteError:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        errMsg:
+          type: string
+      example: 
+        statusCode: 500
+        errMsg: There was an error DELETING the information you requested
+        
+  responses:
+    genericSuccessResponse:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/genericResponse'
+    
+    badRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/badRequest'
+            
+    getSuccessResponse:
+      description: Successful retrieval
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/getSuccess'
+    postSuccessResponse:
+      description: Created
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/postSuccess'
+    putSuccessResponse:
+      description: Successful update
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/putSuccess'
+  
+    delSuccessResponse:
+      description: OK
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/delSuccess'          
+            
+    genericErrorResponse:
+      description: ERROR
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/genericError'
+    getErrorResponse:
+      description: ERROR
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/getError'
+    postErrorResponse:
+      description: ERROR
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/postError'
+    putErrorResponse:
+      description: ERROR
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/putError'
+    deleteErrorResponse:
+      description: ERROR
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/deleteError'
+
+paths:
+  /cheque:
+    post:
+      tags:
+        - Cheque
+      summary: Create a cheque
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  # Loans endpoints
+  /loans/consumers/accounts/{accountId}:
+    get:
+      tags:
+        - Loans
+      summary: Get consumer loans by account ID
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /loans/consumers/accounts:
+    get:
+      tags:
+        - Loans
+      summary: Get consumer loans accounts
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /loans/consumers/actions/{actionId}:
+    get:
+      tags:
+        - Loans
+      summary: Get consumer loans by action ID
+      parameters:
+        - $ref: '#/components/parameters/actionId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /loans/consumers/operations/{operationId}:
+    get:
+      tags:
+        - Loans
+      summary: Get consumer loans by operation ID
+      parameters:
+        - $ref: '#/components/parameters/operationId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /loans/corporate/account/{accountId}:
+    get:
+      tags:
+        - Loans
+      summary: Get corporate loans by account ID
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+          
+  /loans/corporate/action/{actionId}:
+    get:
+      tags:
+        - Loans
+      summary: Get corporate loans by action ID
+      parameters:
+        - $ref: '#/components/parameters/actionId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /loans/corporate/operation/{operationId}:
+    get:
+      tags:
+        - Loans
+      summary: Get corporate loans by operation ID
+      parameters:
+        - $ref: '#/components/parameters/operationId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  # Credit Cards endpoints
+  /credit/cards/account/{accountId}:
+    get:
+      tags:
+        - Credit Cards
+      summary: Get credit cards details by account ID
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /credit/cards/account/details/{accountId}:
+    get:
+      tags:
+        - Credit Cards
+      summary: Get credit cards account details by account ID
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /credit/cards/account/movements/{accountId}:
+    get:
+      tags:
+        - Credit Cards
+      summary: Get credit cards account movements by account ID
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /credit/cards/create:
+    post:
+      tags:
+        - Credit Cards
+      summary: Create a credit card
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /credit/cards/request/approval/{cardId}:
+    post:
+      tags:
+        - Credit Cards
+      summary: Request approval for a credit card
+      parameters:
+        - $ref: '#/components/parameters/cardId'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /credit/cards/cancel/issuing/{cardId}:
+    post:
+      tags:
+        - Credit Cards
+      summary: Cancel credit card issuing
+      parameters:
+        - $ref: '#/components/parameters/cardId'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /credit/cards/activate/{cardId}:
+    post:
+      tags:
+        - Credit Cards
+      summary: Activate a credit card
+      parameters:
+        - $ref: '#/components/parameters/cardId'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /credit/cards/cancel/{cardId}:
+    post:
+      tags:
+        - Credit Cards
+      summary: Cancel a credit card
+      parameters:
+        - $ref: '#/components/parameters/cardId'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /debit/available/cards/products:
+    get:
+      tags:
+        - Debit Cards
+      summary: Get available debit cards products
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /debit/cards/activate/{cardId}:
+    post:
+      tags:
+        - Debit Cards
+      summary: Activate a debit card
+      parameters:
+        - $ref: '#/components/parameters/cardId'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /debit/cards/details/{cardId}:
+    get:
+      tags:
+        - Debit Cards
+      summary: Get debit card details by card ID
+      parameters:
+        - $ref: '#/components/parameters/cardId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /debit/cards/request:
+    post:
+      tags:
+        - Debit Cards
+      summary: Request a debit card
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /debit/cards/create/{cardId}:
+    post:
+      tags:
+        - Debit Cards
+      summary: Create a debit card
+      parameters:
+        - $ref: '#/components/parameters/cardId'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /debit/cards/cancel/{cardId}:
+    post:
+      tags:
+        - Debit Cards
+      summary: Cancel a debit card
+      parameters:
+        - $ref: '#/components/parameters/cardId'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /currency/exchange-rates:
+    get:
+      tags:
+        - Currency
+      summary: Get currency exchange rates
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  
+  # Accounts endpoints
+  /accounts:
+    post:
+      tags:
+        - Accounts
+      summary: Create Current Account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+
+              $ref: '#/components/schemas/bodyExample'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+    
+    get:
+      tags:
+          - Accounts
+      summary: Get Current Accounts by Party or by Contract
+      parameters:
+        - $ref: '#/components/parameters/contract'
+        - $ref: '#/components/parameters/party'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  
+  /accounts/{accountId}:
+    get:
+      tags:
+        - Accounts
+      summary: Get Current Account
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /accounts/{accountId}/balances:
+    get:
+      tags:
+        - Accounts
+      summary: Get Current Account Balances
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /accounts/{accountId}/movements:
+    get:
+      tags:
+        - Accounts
+      summary: Get movements by account ID
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  /accounts/{accountId}/holds:
+    post:
+      tags:
+        - Accounts
+      summary: Launch Current Account Hold
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bodyExample'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+          
+
+  /accounts/{accountId}/holds/{holdId}:
+    put:
+      tags:
+        - Accounts
+      summary: Update Current Account Hold
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/holdId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bodyExample'
+      responses:
+        "200":
+          $ref: '#/components/responses/putSuccessResponse'
+        "500":
+          $ref: '#/components/responses/putErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+    delete:
+      tags:
+        - Accounts
+      summary: Release Current Account Hold
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/holdId'
+      responses:
+        "200":
+          $ref: '#/components/responses/delSuccessResponse'
+        "500":
+          $ref: '#/components/responses/deleteErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /accounts/{accountId}/restrictions:
+    post:
+      tags:
+        - Accounts
+      summary: Create Current Account Restriction
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bodyExample'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  
+  /accounts/{accountId}/restrictions/{restrictionId}:
+    delete:
+      tags:
+        - Accounts
+      summary: Delete Current Account Restriction
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/restrictionId'
+      responses:
+        "200":
+          $ref: '#/components/responses/delSuccessResponse'
+        "500":
+          $ref: '#/components/responses/deleteErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /accounts/{accountId}/information:
+    get:
+      tags:
+        - Accounts
+      summary: Get Account Information
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /accounts/{accountId}/transfers:
+    get:
+      tags:
+        - Accounts
+      summary: Get Instant Transfers
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/transferType' # sent or received
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /accounts/{accountId}/aliases:
+    post:
+      tags:
+        - Accounts
+      summary: Create Account Alias
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bodyExample'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /accounts/{accountId}/aliases/{aliasId}:
+    put:
+      tags:
+        - Accounts
+      summary: Update Account Alias
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/aliasId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bodyExample'
+      responses:
+        "200":
+          $ref: '#/components/responses/putSuccessResponse'
+        "500":
+          $ref: '#/components/responses/putErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+    delete:
+      tags:
+        - Accounts
+      summary: Delete Account Alias
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/aliasId'
+      responses:
+        "200":
+          $ref: '#/components/responses/delSuccessResponse'
+        "500":
+          $ref: '#/components/responses/deleteErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /accounts/{accountId}/aliases/{aliasId}/auth:
+    post:
+      tags:
+        - Accounts
+      summary: Authenticate Account Alias
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/aliasId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bodyExample'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  
+  # Corporate Accounts endpoints        
+  /corporateAccounts:
+    get:
+      summary: Get Corporate Current Accounts
+      operationId: getCorporateCurrentAccounts
+      tags:
+        - Corporate Accounts
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  /corporateAccounts/{accountId}/detail:
+    get:
+      summary: Get Corporate Current Account Detail
+      operationId: getCorporateCurrentAccountDetail
+      tags:
+        - Corporate Accounts
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  /corporateAccounts/{accountId}/pricingEvents:
+    get:
+      summary: Get Corporate Current Account Pricing Event Actions
+      operationId: getCorporateCurrentAccountPricingEventActions
+      tags:
+        - Corporate Accounts
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  /corporateAccounts/{accountId}/pricingEvents/{eventId}/details:
+    get:
+      summary: Get Corporate Current Account Pricing Event Actions Detail
+      operationId: getCorporateCurrentAccountPricingEventActionsDetail
+      tags:
+        - Corporate Accounts
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/eventId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  /corporateAccounts/{accountId}/creditOperations:
+    get:
+      summary: Get Corporate Current Account Credit Operations
+      operationId: getCorporateCurrentAccountCreditOperations
+      tags:
+        - Corporate Accounts
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  /corporateAccounts/{accountId}/creditOperations/{creditOperationId}:
+    get:
+      summary: Get Corporate Current Account Credit Operation Detail
+      operationId: getCorporateCurrentAccountCreditOperationDetail
+      tags:
+        - Corporate Accounts
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/creditOperationId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  /corporateAccounts/{accountId}/creditOperations/{creditOperationId}/collaterals:
+    get:
+      summary: Get Corporate Current Account Credit Operation Linked Collaterals
+      operationId: getCorporateCurrentAccountCreditOperationLinkedCollaterals
+      tags:
+        - Corporate Accounts
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/creditOperationId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  /corporateAccounts/{accountId}/creditOperations/{creditOperationId}/responsibilities:
+    get:
+      summary: Get Corporate Current Account Credit Operation Responsibilities
+      operationId: getCorporateCurrentAccountCreditOperationResponsibilities
+      tags:
+        - Corporate Accounts
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/creditOperationId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  
+  
+  # Orders endpoints
+  
+  /orders:
+    post:
+      summary: Create Payment Order
+      operationId: createPaymentOrder
+      tags:
+        - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bodyExample'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+    get:
+      summary: Get Payment Orders
+      operationId: getPaymentOrders
+      tags:
+        - Orders
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  /orders/{orderId}:
+    delete:
+      summary: Delete Payment Order
+      operationId: deletePaymentOrder
+      tags:
+        - Orders
+      parameters:
+        - $ref: '#/components/parameters/orderId'
+      responses:
+        "200":
+          $ref: '#/components/responses/delSuccessResponse'
+        "500":
+          $ref: '#/components/responses/deleteErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+    put:
+      summary: Update Payment Order
+      operationId: updatePaymentOrder
+      tags:
+        - Orders
+      parameters:
+        - $ref: '#/components/parameters/orderId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bodyExample'
+      responses:
+        "200":
+          $ref: '#/components/responses/putSuccessResponse'
+        "500":
+          $ref: '#/components/responses/putErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  
+  
+  # Deposits endpoints
+  /deposits:
+    get:
+      tags:
+        - Deposits
+      summary: Get Term Deposit Movements
+      operationId: getTermDepositMovements
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+    post:
+      tags:
+        - Deposits
+      summary: Create Term Deposit
+      operationId: createTermDeposit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bodyExample'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /deposits/{depositId}:
+    patch:
+      tags:
+        - Deposits
+      summary: Reinforce Term Deposit
+      operationId: reinforceTermDeposit
+      parameters:
+        - $ref: '#/components/parameters/depositId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bodyExample'
+      responses:
+        "200":
+          $ref: '#/components/responses/putSuccessResponse'
+        "500":
+          $ref: '#/components/responses/putErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+          
+  /deposits/process:
+    post:
+      tags:
+        - Deposits
+      summary: Process Term Deposit Maturity
+      operationId: processTermDepositMaturity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bodyExample'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  /deposits/parties/{partyId}:
+    get:
+      tags:
+        - Deposits
+      summary: Find Term Deposits by Party
+      operationId: findTermDepositsByParty
+      parameters:
+        - $ref: '#/components/parameters/partyId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /deposits/contracts/{contractId}:
+    get:
+      tags:
+        - Deposits
+      summary: Get Term Deposit by Contract
+      operationId: getTermDepositByContract
+      parameters:
+        - $ref: '#/components/parameters/contractId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  # Payments endpoint
+  /payments:
+    get:
+      tags:
+        - Payments
+      summary: Get Catalog Update in EMIS
+      operationId: getCatalogUpdateInEMIS
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+    post:
+      tags:
+        - Payments
+      summary: Execute Service Payment by Type
+      operationId: executeServicePayment
+      parameters: # if type query param is not defined, then executeServicePaymentInEMIS is executed
+        - $ref: '#/components/parameters/payment' # type can either be "special-emis", "rupe-stc" or "batch-file"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bodyExample'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /payments/{paymentId}:
+    put:
+      tags:
+        - Payments
+      summary: Request Catalog Update in EMIS
+      operationId: requestCatalogUpdateInEMIS
+      parameters:
+        - $ref: '#/components/parameters/paymentId'
+      responses:
+        "200":
+          $ref: '#/components/responses/putSuccessResponse'
+        "500":
+          $ref: '#/components/responses/putErrorResponse'    
+  /payments/transfers:
+    post:
+      tags:
+        - Payments
+      summary: Create Current Account Transfer
+      operationId: createCurrentAccountTransfer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bodyExample'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  /payments/transfers/{accountId}:
+    get:
+      tags:
+        - Payments
+      summary: Get Current Account Received Transfer
+      operationId: getCurrentAccountReceivedTransfer
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+    delete:
+      tags:
+        - Payments
+      summary: Cancel Current Account Transferency
+      operationId: cancelCurrentAccountTransferency
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        "200":
+          $ref: '#/components/responses/delSuccessResponse'
+        "500":
+          $ref: '#/components/responses/deleteErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  /payments/transfers/tci:
+    post:
+      tags:
+        - Payments
+      summary: Create Instant Transfer Request
+      operationId: createInstantTransferRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bodyExample'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  /payments/atm:
+    post:
+      tags:
+        - Payments
+      summary: Create ATM Withdrawal Without Card Request in EMIS
+      operationId: createATMWithdrawalWithoutCardRequestInEMIS
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bodyExample'
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  /payments/atm/{accountId}:
+    delete:
+      tags:
+        - Payments
+      summary: Cancel ATM Withdrawal Without Card Request in EMIS
+      operationId: cancelATMWithdrawalWithoutCardRequestInEMIS
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        "200":
+          $ref: '#/components/responses/delSuccessResponse'
+        "500":
+          $ref: '#/components/responses/deleteErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /clients/{clientId}/positions:
+    get:
+      tags:
+        - Clients
+      summary: Get positions by client ID
+      parameters:
+        - $ref: '#/components/parameters/clientId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+  
+  /clients/{clientId}/movements:
+    get:
+      tags:
+        - Clients
+      summary: Get movements by client ID
+      parameters:
+        - $ref: '#/components/parameters/clientId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /transactions/{transactionId}/movements/details:
+    get:
+      tags:
+        - Transactions
+      summary: Get movements details by transaction ID
+      parameters:
+        - $ref: '#/components/parameters/transactionId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /branches:
+    get:
+      tags:
+        - Branches
+      summary: Get Available Branches
+      operationId: getAvaliableBranches
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /branches/{branchId}/details:
+    get:
+      tags:
+        - Branches
+      summary: Get Branch Detail
+      operationId: getBranchDetail
+      parameters:
+        - $ref: '#/components/parameters/branchId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /contracts:
+    get:
+      tags:
+        - Contracts
+      summary: Get Contract
+      operationId: getContract
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+    post:
+      tags:
+        - Contracts
+      summary: Create Customer Contract
+      operationId: createCustomerContract
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              name: John Doe
+              email: john@example.com
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /contracts/{contractId}:
+    get:
+      tags:
+        - Contracts
+      summary: Get Customer Contracts
+      operationId: getCustomerContracts
+      parameters:
+        - $ref: '#/components/parameters/contractId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+    put:
+      tags:
+        - Contracts
+      summary: Update Customer Contract
+      operationId: updateCustomerContract
+      parameters:
+        - $ref: '#/components/parameters/contractId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              name: John Doe
+              email: john@example.com
+      responses:
+        "200":
+          $ref: '#/components/responses/putSuccessResponse'
+        "500":
+          $ref: '#/components/responses/putErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /contracts/profiles/{profileId}:
+    get:
+      tags:
+        - Contracts
+      summary: Get Customer Profile
+      operationId: getCustomerProfile
+      parameters:
+        - $ref: '#/components/parameters/profileId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /contracts/search:
+    get:
+      tags:
+        - Contracts
+      summary: Search Contract
+      operationId: searchContract
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /contracts/{contractId}/notifications:
+    get:
+      tags:
+        - Contracts
+      summary: Get Contract Notifications
+      operationId: getContractNotifications
+      parameters:
+        - $ref: '#/components/parameters/contractId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /contracts/{contractId}/restrictions:
+    get:
+      tags:
+        - Contracts
+      summary: Get Contract Restrictions
+      operationId: getContractRestrictions
+      parameters:
+        - $ref: '#/components/parameters/contractId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /contracts/{contractId}/exemptions:
+    get:
+      tags:
+        - Contracts
+      summary: Get Contract Exemptions
+      operationId: getContractExemptions
+      parameters:
+        - $ref: '#/components/parameters/contractId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /contracts/{contractId}/contacts:
+    get:
+      tags:
+        - Contracts
+      summary: Get Contract Contacts
+      operationId: getContractContacts
+      parameters:
+        - $ref: '#/components/parameters/contractId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /contracts/{contractId}/parties/{partyId}/affiliations:
+    get:
+      tags:
+        - Contracts
+      summary: Get Party Contract Affiliation
+      operationId: getPartyContractAffiliation
+      parameters:
+        - $ref: '#/components/parameters/partyId'
+        - $ref: '#/components/parameters/contractId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /parties:
+    post:
+      tags:
+        - Parties
+      summary: Create Party
+      operationId: createParty
+      requestBody:
+        description: Party creation request
+        required: true
+        content:
+          application/json:
+            example:
+              name: John Doe
+              email: john@example.com
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /parties/{partyId}:
+    get:
+      tags:
+        - Parties
+      summary: Get Party
+      operationId: getParty
+      parameters:
+        - $ref: '#/components/parameters/partyId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+    put:
+      tags:
+        - Parties
+      summary: Update Party
+      operationId: updateParty
+      parameters:
+        - $ref: '#/components/parameters/partyId'
+      requestBody:
+        description: Party update request
+        required: true
+        content:
+          application/json:
+            example:
+              name: Updated Name
+      responses:
+        "200":
+          $ref: '#/components/responses/putSuccessResponse'
+        "500":
+          $ref: '#/components/responses/putErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /parties/documents/{documentId}:
+    get:
+      tags:
+        - Parties
+      summary: Find Party by Identification Document
+      operationId: findPartyByIdentificationDocument
+      parameters:
+        - $ref: '#/components/parameters/documentId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /parties/{partyId}/contacts:
+    get:
+      tags:
+        - Parties
+      summary: Get Party Contacts
+      operationId: getPartyContacts
+      parameters:
+        - $ref: '#/components/parameters/partyId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+          
+    put:
+      tags:
+        - Parties
+      summary: Update Party Contact
+      operationId: updatePartyContact
+      parameters:
+        - $ref: '#/components/parameters/partyId'
+      requestBody:
+        description: Party contact update request
+        required: true
+        content:
+          application/json:
+            example:
+              contact: Updated Contact
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /parties/{partyId}/documents/:
+    get:
+      tags:
+        - Parties
+      summary: Get Party Documents
+      operationId: getPartyDocuments
+      parameters:
+        - $ref: '#/components/parameters/partyId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+    post:
+      tags:
+        - Parties
+      summary: Create Party Document
+      operationId: createPartyDocument
+      parameters:
+        - $ref: '#/components/parameters/partyId'
+      requestBody:
+        description: Party document creation request
+        required: true
+        content:
+          application/json:
+            example:
+              document: New Document
+      responses:
+        "200":
+          $ref: '#/components/responses/postSuccessResponse'
+        "500":
+          $ref: '#/components/responses/postErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /parties/{partyId}/documents/{documentId}:
+    put:
+      tags:
+        - Parties
+      summary: Update Party Document
+      operationId: updatePartyDocument
+      parameters:
+        - $ref: '#/components/parameters/partyId'
+        - $ref: '#/components/parameters/documentId'
+      requestBody:
+        description: Party document update request
+        required: true
+        content:
+          application/json:
+            example:
+              document: Updated Document
+      responses:
+        "200":
+          $ref: '#/components/responses/putSuccessResponse'
+        "500":
+          $ref: '#/components/responses/putErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /parties/{partyId}/restrictions:
+    get:
+      tags:
+        - Parties
+      summary: Get Party Restrictions
+      operationId: getPartyRestrictions
+      parameters:
+        - $ref: '#/components/parameters/partyId'
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+    post:
+      tags:
+        - Parties
+      summary: Create Party Restriction
+      operationId: createPartyRestriction
+      parameters:
+        - $ref: '#/components/parameters/partyId'
+      requestBody:
+        description: Party restriction creation request
+        required: true
+        content:
+          application/json:
+            example:
+              restriction: New Restriction
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+    put:
+      tags:
+        - Parties
+      summary: Update Party and Customer Restrictions
+      operationId: updatePartyAndCustomerRestrictions
+      parameters:
+        - $ref: '#/components/parameters/partyId'
+      requestBody:
+        description: Party and customer restrictions update request
+        required: true
+        content:
+          application/json:
+            example:
+              restrictions: Updated Restrictions
+      responses:
+        "200":
+          $ref: '#/components/responses/getSuccessResponse'
+        "500":
+          $ref: '#/components/responses/getErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
+
+  /parties/{partyId}/restrictions/{restrictionId}:
+    delete:
+      tags:
+        - Parties
+      summary: Delete Party Restriction
+      operationId: deletePartyRestriction
+      parameters:
+        - $ref: '#/components/parameters/partyId'
+        - $ref: '#/components/parameters/restrictionId'
+      responses:
+        "200":
+          $ref: '#/components/responses/delSuccessResponse'
+        "500":
+          $ref: '#/components/responses/deleteErrorResponse'
+        "400":
+          $ref: '#/components/responses/badRequest'
