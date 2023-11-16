@@ -1,0 +1,4863 @@
+#%RAML 1.0
+types:
+  badRequest:
+    type: object
+    example:
+      strict: false
+      value:
+        msg: Bad request
+    properties:
+      msg?:
+        type: string
+  genericResponse:
+    type: object
+    example:
+      strict: false
+      value:
+        msg: Success
+    properties:
+      msg?:
+        type: string
+  getSuccess:
+    type: object
+    properties:
+      info?:
+        type: object
+        example:
+          strict: false
+          value:
+            info1: Value 1
+            info2: Value2
+  putSuccess:
+    type: object
+    example:
+      strict: false
+      value:
+        msg: Data successfully updated
+    properties:
+      msg?:
+        type: string
+  delSuccess:
+    type: object
+    example:
+      strict: false
+      value:
+        msg: Data successfully deleted
+    properties:
+      msg?:
+        type: string
+  genericError:
+    type: object
+    example:
+      strict: false
+      value:
+        errMsg: There was an unknown error
+    properties:
+      errMsg?:
+        type: string
+  postError:
+    type: object
+    example:
+      strict: false
+      value:
+        errMsg: There was an error POSTING the information you requested
+    properties:
+      errMsg?:
+        type: string
+  getError:
+    type: object
+    example:
+      strict: false
+      value:
+        errMsg: There was an error RETRIEVING the information you requested
+    properties:
+      errMsg?:
+        type: string
+  deleteError:
+    type: object
+    example:
+      strict: false
+      value:
+        statusCode: 500
+        errMsg: There was an error DELETING the information you requested
+    properties:
+      statusCode?:
+        type: integer
+      errMsg?:
+        type: string
+  bodyExample:
+    type: object
+    properties:
+      info?:
+        type: object
+        example:
+          strict: false
+          value:
+            name: John Doe
+            email: john@example.com
+  putError:
+    type: object
+    example:
+      strict: false
+      value:
+        errMsg: There was an error UPDATING the information you requested
+    properties:
+      errMsg?:
+        type: string
+  postSuccess:
+    type: object
+    example:
+      strict: false
+      value:
+        msg: Data successfully introduced
+    properties:
+      msg?:
+        type: string
+annotationTypes:
+  amf-serverDescription:
+    type: any
+  amf-exclusiveMinimum:
+    type: any
+  amf-binding:
+    type: any
+  amf-pattern:
+    type: any
+  amf-payloads:
+    type: any
+  amf-exclusiveMaximum:
+    type: any
+  amf-consumes:
+    type: any
+  amf-additionalProperties:
+    type: any
+  amf-or:
+    type: any
+  amf-url:
+    type: any
+  amf-externalDocs:
+    type: any
+  amf-flow:
+    type: any
+  amf-oasDeprecated:
+    type: any
+  amf-contact:
+    type: any
+  amf-multipleOf:
+    type: any
+  amf-xor:
+    type: any
+  amf-not:
+    type: any
+  amf-callbacks:
+    type: any
+  amf-produces:
+    type: any
+  amf-format:
+    type: any
+  amf-license:
+    type: any
+  amf-summary:
+    type: any
+  amf-responses:
+    type: any
+  amf-maximum:
+    type: any
+  amf-tags:
+    type: any
+  amf-dependencies:
+    type: any
+  amf-readOnly:
+    type: any
+  amf-tuple:
+    type: any
+  amf-examples:
+    type: any
+  amf-collectionFormat:
+    type: any
+  amf-termsOfService:
+    type: any
+  amf-servers:
+    type: any
+  amf-xone:
+    type: any
+  amf-defaultResponse:
+    type: any
+  amf-baseUriParameters:
+    type: any
+  amf-parameters:
+    type: any
+  amf-minimum:
+    type: any
+  amf-recursive:
+    type: any
+  amf-and:
+    type: any
+title: BankManagementAPI
+version: 1.0.0
+(amf-tags):
+  -
+    name: Cheque
+    description: Description about Cheques
+  -
+    name: Loans
+    description: Description about Loans
+  -
+    name: Credit Cards
+    description: Description about Credit Cards
+  -
+    name: Debit Cards
+    description: Description about Debit Cards
+  -
+    name: Currency
+    description: Description about Currency
+  -
+    name: Accounts
+    description: Description about Accounts
+  -
+    name: Branches
+    description: Description about Branches
+  -
+    name: Contracts
+    description: Description about Contracts
+  -
+    name: Parties
+    description: Description about Parties
+/cheque:
+  post:
+    (amf-summary): Create a cheque
+    (amf-tags):
+      - Cheque
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/loans/consumers/accounts/{accountId}:
+  get:
+    (amf-summary): Get consumer loans by account ID
+    (amf-tags):
+      - Loans
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/loans/consumers/accounts:
+  get:
+    (amf-summary): Get consumer loans accounts
+    (amf-tags):
+      - Loans
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/loans/consumers/actions/{actionId}:
+  get:
+    (amf-summary): Get consumer loans by action ID
+    (amf-tags):
+      - Loans
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    actionId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/loans/consumers/operations/{operationId}:
+  get:
+    (amf-summary): Get consumer loans by operation ID
+    (amf-tags):
+      - Loans
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    operationId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/loans/corporate/account/{accountId}:
+  get:
+    (amf-summary): Get corporate loans by account ID
+    (amf-tags):
+      - Loans
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/loans/corporate/action/{actionId}:
+  get:
+    (amf-summary): Get corporate loans by action ID
+    (amf-tags):
+      - Loans
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    actionId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/loans/corporate/operation/{operationId}:
+  get:
+    (amf-summary): Get corporate loans by operation ID
+    (amf-tags):
+      - Loans
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    operationId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/credit/cards/account/{accountId}:
+  get:
+    (amf-summary): Get credit cards details by account ID
+    (amf-tags):
+      - Credit Cards
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/credit/cards/account/details/{accountId}:
+  get:
+    (amf-summary): Get credit cards account details by account ID
+    (amf-tags):
+      - Credit Cards
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/credit/cards/account/movements/{accountId}:
+  get:
+    (amf-summary): Get credit cards account movements by account ID
+    (amf-tags):
+      - Credit Cards
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/credit/cards/create:
+  post:
+    (amf-summary): Create a credit card
+    (amf-tags):
+      - Credit Cards
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/credit/cards/request/approval/{cardId}:
+  post:
+    (amf-summary): Request approval for a credit card
+    (amf-tags):
+      - Credit Cards
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    cardId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/credit/cards/cancel/issuing/{cardId}:
+  post:
+    (amf-summary): Cancel credit card issuing
+    (amf-tags):
+      - Credit Cards
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    cardId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/credit/cards/activate/{cardId}:
+  post:
+    (amf-summary): Activate a credit card
+    (amf-tags):
+      - Credit Cards
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    cardId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/credit/cards/cancel/{cardId}:
+  post:
+    (amf-summary): Cancel a credit card
+    (amf-tags):
+      - Credit Cards
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    cardId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/debit/available/cards/products:
+  get:
+    (amf-summary): Get available debit cards products
+    (amf-tags):
+      - Debit Cards
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/debit/cards/activate/{cardId}:
+  post:
+    (amf-summary): Activate a debit card
+    (amf-tags):
+      - Debit Cards
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    cardId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/debit/cards/details/{cardId}:
+  get:
+    (amf-summary): Get debit card details by card ID
+    (amf-tags):
+      - Debit Cards
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    cardId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/debit/cards/request:
+  post:
+    (amf-summary): Request a debit card
+    (amf-tags):
+      - Debit Cards
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/debit/cards/create/{cardId}:
+  post:
+    (amf-summary): Create a debit card
+    (amf-tags):
+      - Debit Cards
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    cardId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/currency/exchange-rates:
+  get:
+    (amf-summary): Get currency exchange rates
+    (amf-tags):
+      - Currency
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/accounts:
+  post:
+    (amf-summary): Create Current Account
+    (amf-tags):
+      - Accounts
+    body:
+      application/json: bodyExample
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  get:
+    (amf-summary): Get Current Accounts by Party or by Contract
+    (amf-tags):
+      - Accounts
+    queryParameters:
+      contract:
+        required: false
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+      party:
+        required: false
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/accounts/{accountId}:
+  get:
+    (amf-summary): Get Current Account
+    (amf-tags):
+      - Accounts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/accounts/{accountId}/balances:
+  get:
+    (amf-summary): Get Current Account Balances
+    (amf-tags):
+      - Accounts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/accounts/{accountId}/movements:
+  get:
+    (amf-summary): Get movements by account ID
+    (amf-tags):
+      - Accounts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/accounts/{accountId}/holds:
+  post:
+    (amf-summary): Launch Current Account Hold
+    (amf-tags):
+      - Accounts
+    body:
+      application/json: bodyExample
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/accounts/{accountId}/holds/{holdId}:
+  put:
+    (amf-summary): Update Current Account Hold
+    (amf-tags):
+      - Accounts
+    body:
+      application/json: bodyExample
+    (amf-baseUriParameters):
+      accountId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+      holdId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: Successful update
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully updated
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error UPDATING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  delete:
+    (amf-summary): Release Current Account Hold
+    (amf-tags):
+      - Accounts
+    (amf-baseUriParameters):
+      accountId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+      holdId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: OK
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully deleted
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                statusCode: 500
+                errMsg: There was an error DELETING the information you requested
+            properties:
+              statusCode?:
+                type: integer
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/accounts/{accountId}/restrictions:
+  post:
+    (amf-summary): Create Current Account Restriction
+    (amf-tags):
+      - Accounts
+    body:
+      application/json: bodyExample
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/accounts/{accountId}/restrictions/{restrictionId}:
+  delete:
+    (amf-summary): Delete Current Account Restriction
+    (amf-tags):
+      - Accounts
+    responses:
+      "200":
+        description: OK
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully deleted
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                statusCode: 500
+                errMsg: There was an error DELETING the information you requested
+            properties:
+              statusCode?:
+                type: integer
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+    restrictionId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/accounts/{accountId}/information:
+  get:
+    (amf-summary): Get Account Information
+    (amf-tags):
+      - Accounts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/accounts/{accountId}/transfers:
+  get:
+    (amf-summary): Get Instant Transfers
+    (amf-tags):
+      - Accounts
+    queryParameters:
+      transferType:
+        required: true
+        example:
+          strict: false
+          value: sent
+        type: string
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/accounts/{accountId}/aliases:
+  post:
+    (amf-summary): Create Account Alias
+    (amf-tags):
+      - Accounts
+    body:
+      application/json: bodyExample
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/accounts/{accountId}/aliases/{aliasId}:
+  put:
+    (amf-summary): Update Account Alias
+    (amf-tags):
+      - Accounts
+    body:
+      application/json: bodyExample
+    (amf-baseUriParameters):
+      accountId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+      aliasId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: Successful update
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully updated
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error UPDATING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  delete:
+    (amf-summary): Delete Account Alias
+    (amf-tags):
+      - Accounts
+    (amf-baseUriParameters):
+      accountId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+      aliasId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: OK
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully deleted
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                statusCode: 500
+                errMsg: There was an error DELETING the information you requested
+            properties:
+              statusCode?:
+                type: integer
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/accounts/{accountId}/aliases/{aliasId}/auth:
+  post:
+    (amf-summary): Authenticate Account Alias
+    (amf-tags):
+      - Accounts
+    body:
+      application/json: bodyExample
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+    aliasId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/corporateAccounts:
+  get:
+    displayName: getCorporateCurrentAccounts
+    (amf-summary): Get Corporate Current Accounts
+    (amf-tags):
+      - Corporate Accounts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/corporateAccounts/{accountId}/detail:
+  get:
+    displayName: getCorporateCurrentAccountDetail
+    (amf-summary): Get Corporate Current Account Detail
+    (amf-tags):
+      - Corporate Accounts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/corporateAccounts/{accountId}/pricingEvents:
+  get:
+    displayName: getCorporateCurrentAccountPricingEventActions
+    (amf-summary): Get Corporate Current Account Pricing Event Actions
+    (amf-tags):
+      - Corporate Accounts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/corporateAccounts/{accountId}/pricingEvents/{eventId}/details:
+  get:
+    displayName: getCorporateCurrentAccountPricingEventActionsDetail
+    (amf-summary): Get Corporate Current Account Pricing Event Actions Detail
+    (amf-tags):
+      - Corporate Accounts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+    eventId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/corporateAccounts/{accountId}/creditOperations:
+  get:
+    displayName: getCorporateCurrentAccountCreditOperations
+    (amf-summary): Get Corporate Current Account Credit Operations
+    (amf-tags):
+      - Corporate Accounts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/corporateAccounts/{accountId}/creditOperations/{creditOperationId}:
+  get:
+    displayName: getCorporateCurrentAccountCreditOperationDetail
+    (amf-summary): Get Corporate Current Account Credit Operation Detail
+    (amf-tags):
+      - Corporate Accounts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+    creditOperationId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/corporateAccounts/{accountId}/creditOperations/{creditOperationId}/collaterals:
+  get:
+    displayName: getCorporateCurrentAccountCreditOperationLinkedCollaterals
+    (amf-summary): Get Corporate Current Account Credit Operation Linked Collaterals
+    (amf-tags):
+      - Corporate Accounts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+    creditOperationId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/corporateAccounts/{accountId}/creditOperations/{creditOperationId}/responsibilities:
+  get:
+    displayName: getCorporateCurrentAccountCreditOperationResponsibilities
+    (amf-summary): Get Corporate Current Account Credit Operation Responsibilities
+    (amf-tags):
+      - Corporate Accounts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+    creditOperationId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/orders:
+  post:
+    displayName: createPaymentOrder
+    (amf-summary): Create Payment Order
+    (amf-tags):
+      - Orders
+    body:
+      application/json: bodyExample
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  get:
+    displayName: getPaymentOrders
+    (amf-summary): Get Payment Orders
+    (amf-tags):
+      - Orders
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/orders/{orderId}:
+  delete:
+    displayName: deletePaymentOrder
+    (amf-summary): Delete Payment Order
+    (amf-tags):
+      - Orders
+    (amf-baseUriParameters):
+      orderId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: OK
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully deleted
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                statusCode: 500
+                errMsg: There was an error DELETING the information you requested
+            properties:
+              statusCode?:
+                type: integer
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  put:
+    displayName: updatePaymentOrder
+    (amf-summary): Update Payment Order
+    (amf-tags):
+      - Orders
+    body:
+      application/json: bodyExample
+    (amf-baseUriParameters):
+      orderId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: Successful update
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully updated
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error UPDATING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/deposits:
+  get:
+    displayName: getTermDepositMovements
+    (amf-summary): Get Term Deposit Movements
+    (amf-tags):
+      - Deposits
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  post:
+    displayName: createTermDeposit
+    (amf-summary): Create Term Deposit
+    (amf-tags):
+      - Deposits
+    body:
+      application/json: bodyExample
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/deposits/{depositId}:
+  patch:
+    displayName: reinforceTermDeposit
+    (amf-summary): Reinforce Term Deposit
+    (amf-tags):
+      - Deposits
+    body:
+      application/json: bodyExample
+    responses:
+      "200":
+        description: Successful update
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully updated
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error UPDATING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    depositId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/deposits/process:
+  post:
+    displayName: processTermDepositMaturity
+    (amf-summary): Process Term Deposit Maturity
+    (amf-tags):
+      - Deposits
+    body:
+      application/json: bodyExample
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/deposits/parties/{partyId}:
+  get:
+    displayName: findTermDepositsByParty
+    (amf-summary): Find Term Deposits by Party
+    (amf-tags):
+      - Deposits
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    partyId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/deposits/contracts/{contractId}:
+  get:
+    displayName: getTermDepositByContract
+    (amf-summary): Get Term Deposit by Contract
+    (amf-tags):
+      - Deposits
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    contractId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/payments:
+  get:
+    displayName: getCatalogUpdateInEMIS
+    (amf-summary): Get Catalog Update in EMIS
+    (amf-tags):
+      - Payments
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  post:
+    displayName: executeServicePayment
+    (amf-summary): Execute Service Payment by Type
+    (amf-tags):
+      - Payments
+    queryParameters:
+      payment:
+        required: false
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    body:
+      application/json: bodyExample
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/payments/{paymentId}:
+  put:
+    displayName: requestCatalogUpdateInEMIS
+    (amf-summary): Request Catalog Update in EMIS
+    (amf-tags):
+      - Payments
+    responses:
+      "200":
+        description: Successful update
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully updated
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error UPDATING the information you requested
+            properties:
+              errMsg?:
+                type: string
+  uriParameters:
+    paymentId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/payments/transfers:
+  post:
+    displayName: createCurrentAccountTransfer
+    (amf-summary): Create Current Account Transfer
+    (amf-tags):
+      - Payments
+    body:
+      application/json: bodyExample
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/payments/transfers/{accountId}:
+  get:
+    displayName: getCurrentAccountReceivedTransfer
+    (amf-summary): Get Current Account Received Transfer
+    (amf-tags):
+      - Payments
+    (amf-baseUriParameters):
+      accountId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  delete:
+    displayName: cancelCurrentAccountTransferency
+    (amf-summary): Cancel Current Account Transferency
+    (amf-tags):
+      - Payments
+    (amf-baseUriParameters):
+      accountId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: OK
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully deleted
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                statusCode: 500
+                errMsg: There was an error DELETING the information you requested
+            properties:
+              statusCode?:
+                type: integer
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/payments/transfers/tci:
+  post:
+    displayName: createInstantTransferRequest
+    (amf-summary): Create Instant Transfer Request
+    (amf-tags):
+      - Payments
+    body:
+      application/json: bodyExample
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/payments/atm:
+  post:
+    displayName: createATMWithdrawalWithoutCardRequestInEMIS
+    (amf-summary): Create ATM Withdrawal Without Card Request in EMIS
+    (amf-tags):
+      - Payments
+    body:
+      application/json: bodyExample
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/payments/atm/{accountId}:
+  delete:
+    displayName: cancelATMWithdrawalWithoutCardRequestInEMIS
+    (amf-summary): Cancel ATM Withdrawal Without Card Request in EMIS
+    (amf-tags):
+      - Payments
+    responses:
+      "200":
+        description: OK
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully deleted
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                statusCode: 500
+                errMsg: There was an error DELETING the information you requested
+            properties:
+              statusCode?:
+                type: integer
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    accountId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/clients/{clientId}/positions:
+  get:
+    (amf-summary): Get positions by client ID
+    (amf-tags):
+      - Clients
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    clientId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/transactions/{transactionId}/movements/details:
+  get:
+    (amf-summary): Get movements details by transaction ID
+    (amf-tags):
+      - Transactions
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    transactionId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/branches:
+  get:
+    displayName: getAvaliableBranches
+    (amf-summary): Get Available Branches
+    (amf-tags):
+      - Branches
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/branches/{branchId}/details:
+  get:
+    displayName: getBranchDetail
+    (amf-summary): Get Branch Detail
+    (amf-tags):
+      - Branches
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    branchId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/contracts:
+  get:
+    displayName: getContract
+    (amf-summary): Get Contract
+    (amf-tags):
+      - Contracts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  post:
+    displayName: createCustomerContract
+    (amf-summary): Create Customer Contract
+    (amf-tags):
+      - Contracts
+    body:
+      application/json: {}
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/contracts/{contractId}:
+  get:
+    displayName: getCustomerContracts
+    (amf-summary): Get Customer Contracts
+    (amf-tags):
+      - Contracts
+    (amf-baseUriParameters):
+      contractId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  put:
+    displayName: updateCustomerContract
+    (amf-summary): Update Customer Contract
+    (amf-tags):
+      - Contracts
+    body:
+      application/json: {}
+    (amf-baseUriParameters):
+      contractId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: Successful update
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully updated
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error UPDATING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/contracts/profiles/{profileId}:
+  get:
+    displayName: getCustomerProfile
+    (amf-summary): Get Customer Profile
+    (amf-tags):
+      - Contracts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    profileId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/contracts/search:
+  get:
+    displayName: searchContract
+    (amf-summary): Search Contract
+    (amf-tags):
+      - Contracts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/contracts/notifications/{contractId}:
+  get:
+    displayName: getContractNotifications
+    (amf-summary): Get Contract Notifications
+    (amf-tags):
+      - Contracts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    contractId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/contracts/restrictions/{contractId}:
+  get:
+    displayName: getContractRestrictions
+    (amf-summary): Get Contract Restrictions
+    (amf-tags):
+      - Contracts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    contractId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/contracts/exemptions/{contractId}:
+  get:
+    displayName: getContractExemptions
+    (amf-summary): Get Contract Exemptions
+    (amf-tags):
+      - Contracts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    contractId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/contracts/contacts/{contractId}:
+  get:
+    displayName: getContractContacts
+    (amf-summary): Get Contract Contacts
+    (amf-tags):
+      - Contracts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    contractId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/contracts/affiliations:
+  get:
+    displayName: getPartyContractAffiliation
+    (amf-summary): Get Party Contract Affiliation
+    (amf-tags):
+      - Contracts
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    partyId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/parties:
+  post:
+    displayName: createParty
+    (amf-summary): Create Party
+    (amf-tags):
+      - Parties
+    body:
+      application/json: {}
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/parties/{partyId}:
+  get:
+    displayName: getParty
+    (amf-summary): Get Party
+    (amf-tags):
+      - Parties
+    (amf-baseUriParameters):
+      partyId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  put:
+    displayName: updateParty
+    (amf-summary): Update Party
+    (amf-tags):
+      - Parties
+    body:
+      application/json: {}
+    (amf-baseUriParameters):
+      partyId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: Successful update
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully updated
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error UPDATING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/parties/documents/{documentId}:
+  get:
+    displayName: findPartyByIdentificationDocument
+    (amf-summary): Find Party by Identification Document
+    (amf-tags):
+      - Parties
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    documentId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/parties/contacts/{partyId}:
+  get:
+    displayName: getPartyContacts
+    (amf-summary): Get Party Contacts
+    (amf-tags):
+      - Parties
+    (amf-baseUriParameters):
+      partyId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  put:
+    displayName: updatePartyContact
+    (amf-summary): Update Party Contact
+    (amf-tags):
+      - Parties
+    body:
+      application/json: {}
+    (amf-baseUriParameters):
+      partyId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/parties/{partyId}/documents/:
+  get:
+    displayName: getPartyDocuments
+    (amf-summary): Get Party Documents
+    (amf-tags):
+      - Parties
+    (amf-baseUriParameters):
+      partyId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  post:
+    displayName: createPartyDocument
+    (amf-summary): Create Party Document
+    (amf-tags):
+      - Parties
+    body:
+      application/json: {}
+    (amf-baseUriParameters):
+      partyId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: Created
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully introduced
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error POSTING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/parties/{partyId}/documents/{documentId}:
+  put:
+    displayName: updatePartyDocument
+    (amf-summary): Update Party Document
+    (amf-tags):
+      - Parties
+    body:
+      application/json: {}
+    responses:
+      "200":
+        description: Successful update
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully updated
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error UPDATING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    partyId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+    documentId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+/parties/restrictions/{partyId}:
+  get:
+    displayName: getPartyRestrictions
+    (amf-summary): Get Party Restrictions
+    (amf-tags):
+      - Parties
+    (amf-baseUriParameters):
+      partyId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  post:
+    displayName: createPartyRestriction
+    (amf-summary): Create Party Restriction
+    (amf-tags):
+      - Parties
+    body:
+      application/json: {}
+    (amf-baseUriParameters):
+      partyId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  put:
+    displayName: updatePartyAndCustomerRestrictions
+    (amf-summary): Update Party and Customer Restrictions
+    (amf-tags):
+      - Parties
+    body:
+      application/json: {}
+    (amf-baseUriParameters):
+      partyId:
+        required: true
+        example:
+          strict: false
+          value: 123Abc
+        type: string
+    responses:
+      "200":
+        description: Successful retrieval
+        body:
+          application/json:
+            type: object
+            properties:
+              info?:
+                type: object
+                example:
+                  strict: false
+                  value:
+                    info1: Value 1
+                    info2: Value2
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                errMsg: There was an error RETRIEVING the information you requested
+            properties:
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+/parties/{partyId}/restrictions/{restrictionId}:
+  delete:
+    displayName: deletePartyRestriction
+    (amf-summary): Delete Party Restriction
+    (amf-tags):
+      - Parties
+    responses:
+      "200":
+        description: OK
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Data successfully deleted
+            properties:
+              msg?:
+                type: string
+      "500":
+        description: ERROR
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                statusCode: 500
+                errMsg: There was an error DELETING the information you requested
+            properties:
+              statusCode?:
+                type: integer
+              errMsg?:
+                type: string
+      "400":
+        description: Bad request
+        body:
+          application/json:
+            type: object
+            example:
+              strict: false
+              value:
+                msg: Bad request
+            properties:
+              msg?:
+                type: string
+  uriParameters:
+    partyId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
+    restrictionId:
+      required: true
+      example:
+        strict: false
+        value: 123Abc
+      type: string
