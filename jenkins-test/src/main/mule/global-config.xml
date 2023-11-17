@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
-	<configuration doc:name="Configuration" doc:id="96c4ef59-6619-4631-9dbf-d0f71b9fa81a" defaultErrorHandler-ref="global-error-handler" />
-	<configuration-properties doc:name="Configuration properties" doc:id="3fdd3a71-964e-4415-ab7f-697390ac20f8" file="properties/common.properties" />
-</mule>
