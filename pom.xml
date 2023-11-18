@@ -47,7 +47,7 @@
 						<forwardSslSession>false</forwardSslSession>
 						<generateDefaultPublicUrl>true</generateDefaultPublicUrl>
 					</deploymentSettings>
-				</cloudHu2bDeployment>
+				</cloudHub2Deployment>
 				</configuration>
 			</plugin>
 		</plugins>
